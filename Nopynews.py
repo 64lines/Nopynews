@@ -39,11 +39,13 @@ class Nopynews:
 		for entry in news_list:
 			title = entry.title
 			description = entry.description
+			description = description[:config.DESCRIPTION_SIZE]
+			description += config.SUSPENTION_POINTS
 			self.show_news_notification(title, description)
 			time.sleep(settings.SECONDS_BETWEEN_NEWS)
 
 	# Show news into a notification
-	def show_news_notification(self, title, description):
+	def show_news_notification(self, title, description):	
 		args = [title, description]
 		command = ExternalApp()
 		command.executeCommand(config.NOTIFY_APP, args)
